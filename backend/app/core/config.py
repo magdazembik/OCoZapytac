@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     """Application settings"""
     
     # Project
-    PROJECT_NAME: str = "O co zapytać"
+    PROJECT_NAME: str = "O Co Zapytać"
     API_V1_STR: str = "/api/v1"
     ENVIRONMENT: str = "development"
     DEBUG: bool = True

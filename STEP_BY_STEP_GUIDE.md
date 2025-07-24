@@ -2,7 +2,7 @@
 
 ## 🎯 Project Overview
 
-**Co Zapytać** is a modern blog platform for Polish entrepreneurs focusing on tax and accounting knowledge. The project consists of:
+**O Co Zapytać** is a modern blog platform for Polish entrepreneurs focusing on tax and accounting knowledge. The project consists of:
 
 - **Backend**: FastAPI with Python (handles data, API, email)
 - **Frontend**: HTML/HTMX/CSS/JavaScript (user interface)
@@ -95,7 +95,7 @@ php -S localhost:3000
 - **Articles**: http://localhost:3000/templates/articles.html
 - **Contact**: http://localhost:3000/templates/contact.html
 
-✅ **Check**: You should see the Co Zapytać homepage
+✅ **Check**: You should see the O Co Zapytać homepage
 
 ## 📝 Step 3: Create Your First Article
 
@@ -154,7 +154,7 @@ After creating an article:
 
 ### 5.1 Update Branding
 
-Edit `frontend/assets/css/main.css`:
+Edit `frontend/static/css/main.css`:
 
 \`\`\`css
 /* Change primary color */
@@ -232,7 +232,7 @@ const API_BASE_URL = 'https://your-backend-url.com/api/v1';
 
 ### Modify Styling
 
-1. Edit CSS files in `frontend/assets/css/`
+1. Edit CSS files in `frontend/static/css/`
 2. Use browser dev tools to test changes
 3. Ensure mobile responsiveness
 
