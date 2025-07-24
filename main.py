@@ -18,7 +18,6 @@ if __name__ == "__main__":
     # Serve on 0.0.0.0:8000 to make it accessible in Replit
     uvicorn.run(
         app, 
-        host="0.0.0.0", 
-        port=8000,
-        reload=True
+        host="localhost", 
+        port=8000
     )

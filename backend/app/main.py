@@ -2,11 +2,14 @@
 Main FastAPI application entry point
 """
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import os
 from contextlib import asynccontextmanager
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+
 
 from app.core.config import settings
 from app.core.database import engine
@@ -57,15 +60,13 @@ def create_application() -> FastAPI:
 app = create_application()
 
 
-@app.get("/")
-async def root():
-    """Root endpoint"""
-    return {
-        "message": "O co zapytam księgowego API",
-        "version": "1.0.0",
-        "docs": "/docs",
-        "redoc": "/redoc"
-    }
+templates = Jinja2Templates(directory=os.path.abspath(os.path.join(os.path.dirname(__file__), "../../templates")))
+
+@app.get("/", response_class=HTMLResponse, include_in_schema=False)
+async def root(request: Request):
+    template = "index.html"
+    response = templates.TemplateResponse(template, {"request": request})
+    return response
 
 
 @app.get("/health")
