@@ -1,14 +1,15 @@
-modules = ["nodejs-20", "python-3.12", "web"]
-run = "npm run dev"
+
+modules = ["python-3.12", "web"]
+run = "cd backend && poetry run python -m app.main"
 
 [nix]
-channel = "stable-25_05"
+channel = "stable-24_05"
 
 [deployment]
-run = ["sh", "-c", "npm run dev"]
+run = ["sh", "-c", "cd backend && poetry run python -m app.main"]
 
 [[ports]]
-localPort = 3000
+localPort = 8000
 externalPort = 80
 
 [workflows]
