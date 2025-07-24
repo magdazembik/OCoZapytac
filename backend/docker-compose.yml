@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=mysql+pymysql://tax_user:tax_password@db:3306/tax_blog_db
+      - REDIS_URL=redis://redis:6379
+      - ENVIRONMENT=development
+      - DEBUG=true
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./uploads:/app/uploads
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_DATABASE=tax_blog_db
+      - MYSQL_USER=tax_user
+      - MYSQL_PASSWORD=tax_password
+      - MYSQL_ROOT_PASSWORD=root_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+  redis_data:

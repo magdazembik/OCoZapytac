@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O nas - Co Zapytać</title>
+    <meta name="description" content="Poznaj zespół Co Zapytać - ekspertów podatkowych i księgowych pomagających polskim przedsiębiorcom.">
+    
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <span class="logo-text">Co Zapytać</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Strona główna</a></li>
+                    <li><a href="articles.html" class="nav-link">Artykuły</a></li>
+                    <li><a href="categories.html" class="nav-link">Kategorie</a></li>
+                    <li><a href="about.html" class="nav-link active">O nas</a></li>
+                    <li><a href="contact.html" class="nav-link">Kontakt</a></li>
+                </ul>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>O nas</h1>
+                <p>Poznaj zespół ekspertów Co Zapytać</p>
+            </div>
+        </section>
+
+        <!-- About Content -->
+        <section class="about-content">
+            <div class="container">
+                <div class="about-text">
+                    <h2>Nasza misja</h2>
+                    <p>Co Zapytać to platforma stworzona z myślą o polskich przedsiębiorcach, którzy potrzebują rzetelnej i aktualnej wiedzy z zakresu podatków i księgowości. Naszą misją jest dostarczanie praktycznych porad, które pomogą w codziennym prowadzeniu firmy.</p>
+                    
+                    <h2>Dlaczego powstaliśmy?</h2>
+                    <p>Polskie przepisy podatkowe i księgowe są skomplikowane i często się zmieniają. Przedsiębiorcy mają trudności z nadążaniem za nowymi regulacjami i ich praktycznym zastosowaniem. Dlatego postanowiliśmy stworzyć miejsce, gdzie można znaleźć jasne odpowiedzi na najważniejsze pytania.</p>
+                    
+                    <h2>Co nas wyróżnia?</h2>
+                    <ul>
+                        <li><strong>Praktyczne podejście</strong> - Nasze artykuły zawierają konkretne przykłady i rozwiązania</li>
+                        <li><strong>Aktualność</strong> - Śledzimy zmiany w przepisach i na bieżąco aktualizujemy treści</li>
+                        <li><strong>Prostota</strong> - Skomplikowane zagadnienia wyjaśniamy prostym językiem</li>
+                        <li><strong>Doświadczenie</strong> - Nasz zespół ma wieloletnie doświadczenie w branży</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Opublikowanych artykułów</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">10,000+</div>
+                        <div class="stat-label">Miesięcznych czytelników</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Lat doświadczenia</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Artykułów miesięcznie</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2>Bądź na bieżąco</h2>
+                    <p>Zapisz się do naszego newslettera i otrzymuj najnowsze artykuły bezpośrednio na swoją skrzynkę e-mail.</p>
+                    <form class="newsletter-form" 
+                          hx-post="http://localhost:8000/api/v1/users/subscribe" 
+                          hx-target="#newsletter-result"
+                          hx-swap="innerHTML">
+                        <input type="email" name="email" placeholder="Twój adres e-mail" required>
+                        <button type="submit" class="btn btn-primary">Zapisz się</button>
+                    </form>
+                    <div id="newsletter-result"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Co Zapytać</h3>
+                    <p>Profesjonalna wiedza podatkowa dla przedsiębiorców.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">LinkedIn</a>
+                        <a href="#" class="social-link">Twitter</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Nawigacja</h4>
+                    <ul>
+                        <li><a href="index.html">Strona główna</a></li>
+                        <li><a href="articles.html">Artykuły</a></li>
+                        <li><a href="categories.html">Kategorie</a></li>
+                        <li><a href="about.html">O nas</a></li>
+                        <li><a href="contact.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kategorie</h4>
+                    <ul>
+                        <li><a href="categories.html?category=Podatki">Podatki</a></li>
+                        <li><a href="categories.html?category=Księgowość">Księgowość</a></li>
+                        <li><a href="categories.html?category=Prawo">Prawo gospodarcze</a></li>
+                        <li><a href="categories.html?category=Finanse">Finanse</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <p>Email: kontakt@cozapytac.pl</p>
+                    <p>Tel: +48 123 456 789</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Co Zapytać. Wszystkie prawa zastrzeżone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
