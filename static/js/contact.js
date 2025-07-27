@@ -136,7 +136,7 @@ function resetContactForm() {
 
   formContainer.innerHTML = `
         <div class="contact-form-header">
-            <h2>Napisz do nas</h2>
+            <h2>Napisz do mnie</h2>
             <p>Wypełnij formularz poniżej, a odpowiemy najszybciej jak to możliwe.</p>
         </div>
 

@@ -207,7 +207,7 @@ SMTP_PASSWORD=your-app-password
 ### 7.2 Frontend Deployment (Vercel/Netlify)
 
 1. Upload `frontend` folder
-2. Update API URL in `assets/js/main.js`:
+2. Update API URL in `static/js/main.js`:
 
 \`\`\`javascript
 const API_BASE_URL = 'https://your-backend-url.com/api/v1';

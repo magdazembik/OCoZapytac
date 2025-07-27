@@ -4,20 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}O Co Zapytać - Wiedza podatkowa dla mikroprzedsiębiorców{% endblock %}</title>
-    <meta name="description" content="{% block description %}Profesjonalna wiedza podatkowa i księgowa dla polskich przedsiębiorców. Aktualne artykuły, porady ekspertów i praktyczne rozwiązania.{% endblock %}">
+    <meta name="description" content="{% block description %}Wiedza podatkowa i księgowa dla polskich mikroprzedsiębiorców. Aktualne artykuły, porady ekspertów i praktyczne rozwiązania.{% endblock %}">
     {% block meta %}
     <meta name="keywords" content="podatki, księgowość, przedsiębiorcy, VAT, PIT, CIT, optymalizacja podatkowa">
     
     <!-- Open Graph -->
     <meta property="og:title" content="O Co Zapytać - Wiedza podatkowa dla mikroprzedsiębiorców">
-    <meta property="og:description" content="Profesjonalna wiedza podatkowa i księgowa dla polskich przedsiębiorców.">
+    <meta property="og:description" content="Wiedza podatkowa i księgowa dla polskich mikroprzedsiębiorców.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ocozapytac.pl">
     <meta property="og:image" content="https://ocozapytac.pl/og-image.jpg">
     {% endblock %}
     
-    <link rel="stylesheet" href="../static/css/main.css">
-    <link rel="stylesheet" href="../static/css/components.css">
+    <!-- <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/components.css"> -->
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Your existing main.css AFTER Bootstrap -->
+    <link href="{{ url_for('static', path='./css/main.css') }}" rel="stylesheet">
+
     {% block extra_css %}{% endblock %}
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 </head>
@@ -26,11 +33,14 @@
     <header class="header">
         <nav class="nav">
             <div class="nav-container">
-                <a href="../index" class="logo">
+                <a href="../" class="logo">
                     <span class="logo-text">O Co Zapytać</span>
                 </a>
+
+                
+                
                 <ul class="nav-menu">
-                    <li><a href="../index" class="nav-link {% block nav_home %}{% endblock %}">Strona główna</a></li>
+                    <li><a href="../" class="nav-link {% block nav_home %}{% endblock %}">Strona główna</a></li>
                     <li><a href="../articles" class="nav-link {% block nav_articles %}{% endblock %}">Artykuły</a></li>
                     <li><a href="../categories" class="nav-link {% block nav_categories %}{% endblock %}">Kategorie</a></li>
                     <li><a href="../about" class="nav-link {% block nav_about %}{% endblock %}">O nas</a></li>
@@ -58,15 +68,15 @@
                     <h3>O Co Zapytać</h3>
                     <p>Wiedza podatkowa dla mikroprzedsiębiorców.</p>
                     <div class="social-links">
-                        <a href="#" class="social-link">Facebook</a>
-                        <a href="#" class="social-link">LinkedIn</a>
+                        <!-- <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">LinkedIn</a> -->
                         <a href="#" class="social-link">Youtube</a>
                     </div>
                 </div>
                 <div class="footer-section">
                     <h4>Nawigacja</h4>
                     <ul>
-                        <li><a href="../index">Strona główna</a></li>
+                        <li><a href="../">Strona główna</a></li>
                         <li><a href="../articles">Artykuły</a></li>
                         <li><a href="../contact">Kontakt</a></li>
                     </ul>
@@ -94,5 +104,7 @@
 
     <script src="../static/js/main.js"></script>
     {% block extra_js %}{% endblock %}
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

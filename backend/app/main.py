@@ -80,5 +80,5 @@ async def articles(request: Request):
     return templates.TemplateResponse("articles.html", {"request": request})
 
 @app.get("/categories", response_class=HTMLResponse)
-async def articles(request: Request):
+async def categories(request: Request):
     return templates.TemplateResponse("categories.html", {"request": request})

@@ -1,3 +1,22 @@
+/* Add this at the top to use Bootstrap variables */
+:root {
+  --bs-body-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --bs-body-bg: #fff;
+  --bs-body-color: #333;
+}
+
+/* Your existing styles can remain mostly the same, but you can now: */
+/* 1. Use Bootstrap variables (var(--bs-primary)) */
+/* 2. Remove styles that Bootstrap already handles (like basic button styles) */
+/* 3. Add !important where needed to override Bootstrap */
+
+.btn-primary {
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+}
+
+/* Keep your custom styles that differ from Bootstrap */
+
 /* Contact Section */
 .contact-section {
   padding: 3rem 0;
