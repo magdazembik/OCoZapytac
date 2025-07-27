@@ -92,7 +92,7 @@ function showError(message) {
         <div class="error-message">
             <h2>Błąd</h2>
             <p>${message}</p>
-            <a href="articles.html" class="btn btn-primary">Powrót do artykułów</a>
+            <a href="/articles" class="btn btn-primary">Powrót do artykułów</a>
         </div>
     `
 }

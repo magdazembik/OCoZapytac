@@ -1,7 +1,3 @@
-"""
-Main FastAPI application entry point
-"""
-
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -9,13 +5,15 @@ import os
 from contextlib import asynccontextmanager
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-
-
 from app.core.config import settings
 from app.core.database import engine
 from app.models import Base
 from app.api.v1.api import api_router
+from app.api.v1.endpoints import pages
 
+# Set up Jinja2 templates
+TEMPLATES_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../templates"))
+templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -26,10 +24,8 @@ async def lifespan(app: FastAPI):
     # Shutdown
     pass
 
-
 def create_application() -> FastAPI:
     """Create FastAPI application with all configurations"""
-    
     app = FastAPI(
         title=settings.PROJECT_NAME,
         description="Professional API for Polish entrepreneur tax blog",
@@ -50,36 +46,39 @@ def create_application() -> FastAPI:
     # Include API router
     app.include_router(api_router, prefix=settings.API_V1_STR)
 
-    # Serve static files
-    if os.path.exists("static"):
-        app.mount("/static", StaticFiles(directory="static"), name="static")
+    # # Include static pages router
+    # app.include_router(pages.router)
+
+    # Serve static files (if present)
+    static_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../static"))
+    if os.path.exists(static_dir):
+        app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
     return app
 
-
 app = create_application()
-
-
-templates = Jinja2Templates(directory=os.path.abspath(os.path.join(os.path.dirname(__file__), "../../templates")))
 
 @app.get("/", response_class=HTMLResponse, include_in_schema=False)
 async def root(request: Request):
-    template = "index.html"
-    response = templates.TemplateResponse(template, {"request": request})
-    return response
-
+    return templates.TemplateResponse("index.html", {"request": request})
 
 @app.get("/health")
 async def health_check():
     """Health check endpoint"""
     return {"status": "healthy", "service": "tax-blog-backend"}
 
+@app.get("/about", response_class=HTMLResponse)
+async def about(request: Request):
+    return templates.TemplateResponse("about.html", {"request": request})
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(
-        "app.main:app",
-        host="0.0.0.0",
-        port=8000,
-        reload=True if settings.ENVIRONMENT == "development" else False,
-    )
+@app.get("/contact", response_class=HTMLResponse)
+async def contact(request: Request):
+    return templates.TemplateResponse("contact.html", {"request": request})
+
+@app.get("/articles", response_class=HTMLResponse)
+async def articles(request: Request):
+    return templates.TemplateResponse("articles.html", {"request": request})
+
+@app.get("/categories", response_class=HTMLResponse)
+async def articles(request: Request):
+    return templates.TemplateResponse("categories.html", {"request": request})

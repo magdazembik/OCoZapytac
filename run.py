@@ -1,8 +1,5 @@
 
 #!/usr/bin/env python3
-"""
-Main entry point that serves static HTML files and proxies API requests to FastAPI backend
-"""
 import os
 import sys
 from pathlib import Path
