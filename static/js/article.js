@@ -28,8 +28,8 @@ async function loadArticle(slug) {
 
 function displayArticle(article) {
   // Update page title and meta
-  document.title = `${article.title} - Co Zapytać`
-  document.getElementById("articleTitle").textContent = `${article.title} - Co Zapytać`
+  document.title = `${article.title} - O Co Zapytać`
+  document.getElementById("articleTitle").textContent = `${article.title} - O Co Zapytać`
   document.getElementById("articleDescription").content = article.excerpt
   document.getElementById("breadcrumbTitle").textContent = article.title
 

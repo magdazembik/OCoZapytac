@@ -1,4 +1,4 @@
-# 📝 STEP-BY-STEP GUIDE: Co Zapytać - Polish Entrepreneur Blog
+# 📝 STEP-BY-STEP GUIDE: O Co Zapytać - Polish Entrepreneur Blog
 
 ## 🎯 Project Overview
 
