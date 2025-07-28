@@ -3,72 +3,71 @@
 {% block title %}O Co Zapytać - Wiedza podatkowa dla mikroprzedsiębiorców{% endblock %}
 
 {% block content %}
-        <section class="hero">
-            <div class="hero-container ms-5">
-                <div class="hero-content">
-                    <h1 class="hero-title">Portal dla mikroprzedsiębiorców</h1>
-                    <p class="hero-subtitle">Aktualne informacje, praktyczne porady i ekspercka wiedza z zakresu podatków i księgowości dla polskich firm.</p>
-                    <div class="hero-buttons">
-                        <a href="/articles" class="btn btn-primary">Przeglądaj artykuły</a>
-                        <a href="#newsletter" class="btn btn-secondary">Zapisz się do newslettera</a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="/placeholder.svg?height=400&width=600&text=Biuro+księgowe" alt="Biuro księgowe" />
-                </div>
-            </div>
-        </section>
+<!-- Hero Section -->
+<section class="custom-hero">
+  <div class="container">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1 class="hero-title">Portal dla mikroprzedsiębiorców</h1>
+        <p class="hero-subtitle">Aktualne informacje, praktyczne porady i ekspercka wiedza z zakresu podatków i księgowości dla polskich firm.</p>
+        <div class="hero-buttons">
+          <a href="/articles" class="btn btn-custom-primary">Przeglądaj artykuły</a>
+          <a href="#newsletter" class="btn btn-custom-secondary">Zapisz się do newslettera</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="/placeholder.svg?height=400&width=600&text=Biuro+księgowe" alt="Biuro księgowe" class="img-fluid" />
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- Featured Articles -->
-        <section class="featured-articles">
-            <div class="container">
-                <h2 class="section-title">Najnowsze artykuły</h2>
-                <div class="articles-grid" id="featuredArticles" 
-                     hx-get="http://localhost:8000/api/v1/articles/?limit=6" 
-                     hx-trigger="load"
-                     hx-target="#featuredArticles">
-                    <div class="loading">Ładowanie artykułów...</div>
-                </div>
-                <div class="text-center">
-                    <a href="/articles" class="btn btn-outline">Zobacz wszystkie artykuły</a>
-                </div>
-            </div>
-        </section>
+<!-- Featured Articles -->
+<section class="custom-featured-articles">
+  <div class="container">
+    <h2 class="section-title">Najnowsze artykuły</h2>
+    <div class="articles-grid" id="featuredArticles" 
+         hx-get="http://localhost:8000/api/v1/articles/?limit=6" 
+         hx-trigger="load"
+         hx-target="#featuredArticles">
+      <div class="loading">Ładowanie artykułów...</div>
+    </div>
+    <div class="text-center mt-4">
+      <a href="/articles" class="btn btn-custom-outline">Zobacz wszystkie artykuły</a>
+    </div>
+  </div>
+</section>
 
-        <!-- About Section -->
-        <section class="about-section">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-text">
-                        <h2>O Co Zapytać</h2>
-                        <p>Nie musisz być specjalistą w księgowości, ale dzięki mnie będziesz się lepiej orientować
-                            w skomplikowanym świecie przepisów podatkowych.</p>
-                        <p>Artykuły tutaj są napisane prostym językiem i zawierają praktyczne przykłady, które pomogą Ci w codziennym prowadzeniu firmy.</p>
-                        <a href="/about" class="btn btn-primary">Dowiedz się więcej</a>
-                    </div>
-        
-                </div>
-            </div>
-        </section>
+<!-- About Section -->
+<section class="custom-about-section">
+  <div class="container">
+    <div class="about-content">
+      <div class="about-text">
+        <h2>O Co Zapytać</h2>
+        <p>Nie musisz być specjalistą w księgowości, ale dzięki mnie będziesz się lepiej orientować
+          w skomplikowanym świecie przepisów podatkowych.</p>
+        <p>Artykuły tutaj są napisane prostym językiem i zawierają praktyczne przykłady, które pomogą Ci w codziennym prowadzeniu firmy.</p>
+        <a href="/about" class="btn btn-custom-primary">Dowiedz się więcej</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- Newsletter -->
-        <section class="newsletter" id="newsletter">
-            <div class="container">
-                <div class="newsletter-content">
-                    <h2>Bądź na bieżąco</h2>
-                    <p>Zapisz się do naszego newslettera i otrzymuj najnowsze artykuły bezpośrednio na swoją skrzynkę e-mail.</p>
-                    <form class="newsletter-form" 
-                          hx-post="http://localhost:8000/api/v1/users/subscribe" 
-                          hx-target="#newsletter-result"
-                          hx-swap="innerHTML">
-                        <input type="email" name="email" placeholder="Twój adres e-mail" required>
-                        <button type="submit" class="btn btn-primary">Zapisz się</button>
-                    </form>
-                    <div id="newsletter-result"></div>
-                </div>
-            </div>
-        </section>
-    {% endblock %}
-    
-
-    
+<!-- Newsletter -->
+<section class="custom-newsletter" id="newsletter">
+  <div class="container">
+    <div class="newsletter-content">
+      <h2>Bądź na bieżąco</h2>
+      <p>Zapisz się do naszego newslettera i otrzymuj najnowsze artykuły bezpośrednio na swoją skrzynkę e-mail.</p>
+      <form class="newsletter-form" 
+            hx-post="http://localhost:8000/api/v1/users/subscribe" 
+            hx-target="#newsletter-result"
+            hx-swap="innerHTML">
+        <input type="email" name="email" placeholder="Twój adres e-mail" required>
+        <button type="submit" class="btn btn-custom-white">Zapisz się</button>
+      </form>
+      <div id="newsletter-result"></div>
+    </div>
+  </div>
+</section>
+{% endblock %}
