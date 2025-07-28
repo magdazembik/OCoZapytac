@@ -3,55 +3,63 @@
 {% block title %}O Co Zapytać - Wiedza podatkowa dla mikroprzedsiębiorców{% endblock %}
 
 {% block content %}
-        <section class="page-header">
-            <div class="container">
-                <h1>O mnie</h1>
-                <p>Poznajmy się</p>
-            </div>
-        </section>
+<!-- Page Header -->
+<section class="custom-page-header py-5">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold mb-3">O mnie</h1>
+        <p class="lead">Poznajmy się</p>
+    </div>
+</section>
 
-        <!-- About Content -->
-        <section class="about-content">
-            <div class="container">
+<!-- About Content -->
+<section class="custom-about-content py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
                 <div class="about-text">
-                    <h2>Misja</h2>
-                    <p>Co Zapytać to platforma stworzona z myślą o polskich mikroprzedsiębiorcach, którzy potrzebują rzetelnej, aktualnej, i prosto przekezanej wiedzy z zakresu podatków i księgowości. Naszą misją jest dostarczanie praktycznych porad, które pomogą w codziennym prowadzeniu firmy.</p>
+                    <h2 class="mb-4">Misja</h2>
+                    <p class="mb-4">O Co Zapytać to platforma stworzona z myślą o polskich mikroprzedsiębiorcach, którzy potrzebują rzetelnej, aktualnej, 
+                        i prosto przekazanej wiedzy z zakresu podatków i księgowości. 
+                        Moją misją jest dostarczanie praktycznych wskazówek, które pomogą w codziennym prowadzeniu firmy.</p>
                     
-                    <h2>Dlaczego powstał ten portal?</h2>
-                    <p>Polskie przepisy podatkowe i księgowe są skomplikowane i często się zmieniają. Przedsiębiorcy mają trudności z nadążaniem za nowymi regulacjami i ich praktycznym zastosowaniem. Dlatego postanowiliśmy stworzyć miejsce, gdzie można znaleźć jasne odpowiedzi na najważniejsze pytania.</p>
+                    <h2 class="mb-4">Dlaczego powstał ten portal?</h2>
+                    <p class="mb-4">Polskie przepisy podatkowe i księgowe są skomplikowane i często się zmieniają. 
+                        Przedsiębiorcy mają trudności z nadążaniem za nowymi regulacjami i ich praktycznym zastosowaniem. 
+                        Dlatego postanowiłam stworzyć miejsce, gdzie można znaleźć jasne odpowiedzi na najważniejsze pytania.</p>
                     
-                    <h2>Co nas wyróżnia?</h2>
-                    <ul>
-                        <li><strong>Praktyczne podejście</strong> - Nasze artykuły zawierają konkretne przykłady i rozwiązania</li>
-                        <li><strong>Aktualność</strong> - Śledzę zmiany w przepisach i na bieżąco aktualizuję treści</li>
-                        <li><strong>Prostota</strong> - Skomplikowane zagadnienia przekazane są prostym językiem</li>
-                        
+                    <h2 class="mb-4">Co mnie wyróżnia?</h2>
+                    <ul class="mb-4">
+                        <li class="mb-2"><strong>Praktyczne podejście</strong> - Artykuły zawierają konkretne przykłady i rozwiązania</li>
+                        <li class="mb-2"><strong>Aktualność</strong> - Śledzę zmiany w przepisach i na bieżąco aktualizuję treści</li>
+                        <li class="mb-2"><strong>Prostota</strong> - Skomplikowane zagadnienia przekazane są prostym językiem w przystępny sposób</li>
                     </ul>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        
-           
-
-        <!-- Newsletter -->
-        <section class="newsletter">
-            <div class="container">
-                <div class="newsletter-content">
-                    <h2>Bądź na bieżąco</h2>
-                    <p>Zapisz się do newslettera i otrzymuj artykuły bezpośrednio na swoją skrzynkę e-mail.</p>
-                    <form class="newsletter-form" 
-                          hx-post="http://localhost:8000/api/v1/users/subscribe" 
-                          hx-target="#newsletter-result"
-                          hx-swap="innerHTML">
-                        <input type="email" name="email" placeholder="Twój adres e-mail" required>
-                        <button type="submit" class="btn btn-primary">Zapisz się</button>
-                    </form>
-                    <div id="newsletter-result"></div>
-                </div>
+<!-- Newsletter -->
+<section class="custom-newsletter py-5" id="newsletter">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="mb-3">Bądź na bieżąco</h2>
+                <p class="mb-4">Zapisz się do newslettera i otrzymuj artykuły bezpośrednio na swoją skrzynkę e-mail.</p>
+                <form class="row g-2 justify-content-center"
+                      hx-post="http://localhost:8000/api/v1/users/subscribe" 
+                      hx-target="#newsletter-result"
+                      hx-swap="innerHTML">
+                    <div class="col-md-8">
+                        <input type="email" name="email" class="form-control form-control-lg" placeholder="Twój adres e-mail" required>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-custom-white btn-lg w-100">Zapisz się</button>
+                    </div>
+                </form>
+                <div id="newsletter-result" class="mt-3"></div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 {% endblock %}
-
-    <script src="static/js/main.js"></script>
-    <script src="static/js/about.js"></script>

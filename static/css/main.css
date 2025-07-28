@@ -353,3 +353,29 @@ p {
     grid-template-columns: 1fr;
   }
 }
+
+/* Page Header */
+.custom-page-header {
+    background-color: #f8fafc;
+    text-align: center;
+}
+
+/* About Content */
+.custom-about-content {
+    background-color: #fff;
+}
+
+.custom-about-content h2 {
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.custom-about-content ul {
+    padding-left: 1.5rem;
+}
+
+.custom-about-content li {
+    margin-bottom: 0.75rem;
+}
