@@ -4,14 +4,15 @@
     <div class="article-card">
       <img src="{{ article.image_url or '/placeholder.svg?text=Article+Image' }}" 
            class="article-card-img" 
-           alt="{{ article.title }}">
-      <div class="article-card-body">
-        <span class="article-badge">{{ article.category }}</span>
-        <h3>
-          <a href="/artykul/{{ article.slug }}" class="article-title">{{ article.title }}</a>
+           alt="{{ article.title }}"
+           style="width: 100%; height: 200px; object-fit: cover;">
+      <div class="article-card-body" style="padding: 1.5rem;">
+        <span class="article-badge" style="display: inline-block; background-color: #dbeafe; color: #1e40af; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.75rem;">{{ article.category }}</span>
+        <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">
+          <a href="/artykul/{{ article.slug }}" class="article-title" style="color: #1e293b; text-decoration: none;">{{ article.title }}</a>
         </h3>
-        <p class="article-excerpt">{{ article.excerpt }}</p>
-        <div class="article-meta">
+        <p class="article-excerpt" style="color: #64748b; margin-bottom: 1rem; line-height: 1.5;">{{ article.excerpt }}</p>
+        <div class="article-meta" style="display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem; color: #6b7280;">
           <span class="article-author">{{ article.author }}</span>
           <span class="article-read-time">{{ article.read_time }}</span>
         </div>
