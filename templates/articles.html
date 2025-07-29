@@ -3,50 +3,32 @@
 {% block title %}O Co Zapytać - Portal dla mikroprzedsiębiorców{% endblock %}
 
 {% block content %}
-        <div class="main-content articles-page">
-            <!-- Page Header -->
-            <section class="page-header">
-                <div class="container">
-                    <h1>Wszystkie artykuły</h1>
-                    <p>Przeglądaj bazę wiedzy</p>
-                </div>
-            </section>
+<!-- Page Header -->
+<section class="custom-page-header py-5">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold mb-3">Wszystkie artykuły</h1>
+        <p class="lead">Przeglądaj bazę wiedzy</p>
+    </div>
+</section>
 
-            <!-- Filters and Search
-            <section class="filters-section">
-                <div class="container">
-                    <div class="filters-container">
-                        <div class="search-box">
-                            <input type="text" id="searchInput" placeholder="Szukaj artykułów..." />
-                            <button type="button" class="btn btn-outline-dark" id="searchButton">Szukaj</button>
-                        </div>
-                        <div class="filter-buttons">
-                            <button class="filter-btn active" data-category="all">Wszystkie</button>
-                            <button type="button" class="btn btn-outline-secondary btn-sm" data-category="Podatki">Podatki</button>
-                        </div>
-                    </div>
+<!-- Articles Grid -->
+<section class="custom-featured-articles py-5">
+    <div class="container">
+        <div class="row g-4" id="articlesGrid" 
+             hx-get="http://localhost:8000/api/v1/articles/" 
+             hx-trigger="load"
+             hx-target="#articlesGrid">
+            <div class="col-12 text-center py-4">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Ładowanie artykułów...</span>
                 </div>
-            </section> -->
-
-            <!-- Articles Grid -->
-            <section class="articles-section">
-                <div class="container">
-                    <div class="articles-grid" id="articlesGrid" 
-                         hx-get="http://localhost:8000/api/v1/articles/" 
-                         hx-trigger="load"
-                         hx-target="#articlesGrid">
-                        <div class="loading">Ładowanie artykułów...</div>
-                    </div>
-                    
-                    <!-- Load More Button -->
-                    <div class="load-more-container" id="loadMoreContainer" style="display: none;">
-                        <button class="btn btn-outline" id="loadMoreBtn">Załaduj więcej artykułów</button>
-                    </div>
-                </div>
-            </section>
+            </div>
         </div>
-   {% endblock %}
-
-    <script src="static/js/main.js"></script>
-    <script src="static/js/articles.js"></script>
-
+        
+        <!-- Load More Button -->
+        <div class="text-center mt-4" id="loadMoreContainer" style="display: none;">
+            <button class="btn btn-custom-outline" id="loadMoreBtn">Załaduj więcej artykułów</button>
+        </div>
+    </div>
+</section>
+{% endblock %}
