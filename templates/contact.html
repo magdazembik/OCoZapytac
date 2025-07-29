@@ -1,106 +1,131 @@
 {% extends "base.html" %}
 
-{% block title %}O Co Zapytać - Wiedza podatkowa dla mikroprzedsiębiorców{% endblock %}
+{% block title %}Kontakt - O Co Zapytać{% endblock %}
 
 {% block content %}
-        <!-- Page Header -->
-        <section class="page-header">
-            <div class="container">
-                <h1>Kontakt</h1>
-                <p>Masz sugestie ne ulepszenie tej strony?
-                     Skontaktuj się ze mną</p>
-            </div>
-        </section>
+<!-- Page Header -->
+<section class="custom-page-header py-5">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold mb-3">Kontakt</h1>
+        <p class="lead">Masz sugestie na ulepszenie tej strony? Skontaktuj się ze mną</p>
+    </div>
+</section>
 
-        <!-- Contact Section -->
-        <section class="contact-section">
-            <div class="container">
-                <div class="contact-grid">
-                    <!-- Contact Form -->
-                    <div class="contact-form-container">
-                        <h2>Napisz do mnie</h2>
-                        <form class="contact-form" 
-                              hx-post="http://localhost:8000/api/v1/contact/" 
-                              hx-target="#contact-result"
-                              hx-swap="innerHTML">
-                            <div class="form-group">
-                                <label for="name">Imię </label>
-                                <input type="text" id="name" name="name">
+<!-- Contact Section -->
+<section class="custom-about-section">
+    <div class="container">
+        <div class="row g-5">
+            <!-- Contact Form -->
+            <div class="col-lg-8">
+                <div class="contact-form-container">
+                    <h2 class="mb-4">Napisz do mnie</h2>
+                    <form class="contact-form" 
+                          hx-post="http://localhost:8000/api/v1/contact/" 
+                          hx-target="#contact-result"
+                          hx-swap="innerHTML">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="name" class="form-label">Imię</label>
+                                    <input type="text" id="name" name="name" class="form-control" style="padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem;">
+                                </div>
                             </div>
                             
-                            <div class="form-group">
-                                <label for="email">Adres e-mail *</label>
-                                <input type="email" id="email" name="email" required>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="email" class="form-label">Adres e-mail *</label>
+                                    <input type="email" id="email" name="email" class="form-control" required style="padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem;">
+                                </div>
                             </div>
-                            
-                            <div class="form-group">
-                                <label for="subject">Temat *</label>
-                                <select id="subject" name="subject" required>
-                                    <option value="">Wybierz temat</option>
-                                    <option value="Sugestie">Sugestie</option>
-                                    <!-- <option value="Pytanie o podatki">Pytanie o podatki</option>
-                                    <option value="Pytanie o księgowość">Pytanie o księgowość</option> -->
-                                    <option value="Współpraca">Współpraca</option>
-                                    <option value="Inne">Inne</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="message">Wiadomość *</label>
-                                <textarea id="message" name="message" rows="6" required placeholder="Podziel się sugestią..."></textarea>
-                            </div>
-                            
-                            <div class="form-group checkbox-group">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="newsletter" value="true">
-                                    <span class="checkmark"></span>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label for="subject" class="form-label">Temat *</label>
+                            <select id="subject" name="subject" class="form-select" required style="padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem;">
+                                <option value="">Wybierz temat</option>
+                                <option value="Sugestie">Sugestie</option>
+                                <option value="Współpraca">Współpraca</option>
+                                <option value="Inne">Inne</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label for="message" class="form-label">Wiadomość *</label>
+                            <textarea id="message" name="message" rows="6" class="form-control" required placeholder="Podziel się sugestią..." style="padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; resize: vertical;"></textarea>
+                        </div>
+                        
+                        <div class="form-group mb-4">
+                            <div class="form-check">
+                                <input type="checkbox" name="newsletter" value="true" class="form-check-input" id="newsletter-check">
+                                <label class="form-check-label" for="newsletter-check">
                                     Chcę otrzymywać newsletter z najnowszymi artykułami
                                 </label>
                             </div>
-                            
-                            <button type="submit" class="btn btn-primary">Wyślij wiadomość</button>
-                        </form>
-                        
-                        <div id="contact-result"></div>
-                    </div>
-
-                    <!-- Contact Info -->
-                    <div class="contact-info">
-                        <h2>Informacje kontaktowe</h2>
-                        
-                        <div class="contact-item">
-                            <h3>E-mail</h3>
-                            <p>kontakt@ocozapytac.pl</p>
                         </div>
                         
-                        
-                        
-                        
+                        <button type="submit" class="btn btn-custom-primary">Wyślij wiadomość</button>
+                    </form>
+                    
+                    <div id="contact-result" class="mt-3"></div>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="col-lg-4">
+                <div class="contact-info">
+                    <h2 class="mb-4">Informacje kontaktowe</h2>
+                    
+                    <div class="contact-item mb-4 p-4" style="background-color: #f8fafc; border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                        <h3 class="h5 mb-2" style="color: var(--primary-color);">E-mail</h3>
+                        <p class="mb-0">kontakt@ocozapytac.pl</p>
+                    </div>
+                    
+                    <div class="contact-item mb-4 p-4" style="background-color: #f8fafc; border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                        <h3 class="h5 mb-2" style="color: var(--primary-color);">Czas odpowiedzi</h3>
+                        <p class="mb-0">Odpowiadam na wiadomości w ciągu 24-48 godzin</p>
+                    </div>
+                    
+                    <div class="contact-item p-4" style="background-color: #f8fafc; border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                        <h3 class="h5 mb-2" style="color: var(--primary-color);">Najlepsze godziny</h3>
+                        <p class="mb-0">Poniedziałek - Piątek<br>9:00 - 17:00</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        
-        <!-- Newsletter Section -->
-        <section class="newsletter">
-            <div class="container">
-                <div class="newsletter-content">
-                    <h2>Bądź na bieżąco</h2>
-                    <p>Zapisz się do newslettera i otrzymuj najnowsze artykuły bezpośrednio na swoją skrzynkę e-mail.</p>
-                    <form class="newsletter-form" 
-                          hx-post="http://localhost:8000/api/v1/users/subscribe" 
-                          hx-target="#newsletter-result"
-                          hx-swap="innerHTML">
-                        <input type="email" name="email" placeholder="Twój adres e-mail" required>
-                        <button type="submit" class="btn btn-primary">Zapisz się</button>
-                    </form>
-                    <div id="newsletter-result"></div>
-                </div>
-            </div>
-        </section>
+<!-- Newsletter Section -->
+<section class="custom-newsletter" id="newsletter">
+    <div class="container">
+        <div class="newsletter-content">
+            <h2>Bądź na bieżąco</h2>
+            <p>Zapisz się do naszego newslettera i otrzymuj najnowsze artykuły bezpośrednio na swoją skrzynkę e-mail.</p>
+            <form class="newsletter-form" 
+                  hx-post="http://localhost:8000/api/v1/users/subscribe" 
+                  hx-target="#newsletter-result"
+                  hx-swap="innerHTML">
+                <input type="email" name="email" placeholder="Twój adres e-mail" required>
+                <button type="submit" class="btn btn-custom-white">Zapisz się</button>
+            </form>
+            <div id="newsletter-result"></div>
+        </div>
+    </div>
+</section>
 {% endblock %}
 
-    <script src="static/js/main.js"></script>
-    <script src="static/js/contact.js"></script>
-
+{% block scripts %}
+<script>
+// Contact form enhancement
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.contact-form');
+    if (form) {
+        form.addEventListener('htmx:afterRequest', function(event) {
+            if (event.detail.successful) {
+                form.reset();
+            }
+        });
+    }
+});
+</script>
+{% endblock %}
