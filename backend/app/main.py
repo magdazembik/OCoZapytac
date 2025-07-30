@@ -256,3 +256,48 @@ async def submit_contact_form(
             status_code=500, 
             detail="Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później."
         )
+
+# NEW: Single article page endpoint
+@app.get("/artykul/{slug}", response_class=HTMLResponse)
+async def single_article(request: Request, slug: str, db: Session = Depends(get_db)):
+    """Display single article by slug"""
+    # Get article by slug
+    article = db.query(Article).filter(
+        Article.slug == slug,
+        Article.is_published == True
+    ).first()
+    
+    if not article:
+        raise HTTPException(status_code=404, detail="Artykuł nie został znaleziony")
+    
+    return templates.TemplateResponse("single_article.html", {
+        "request": request,
+        "article": article
+    })
+
+# HTMX endpoints for dynamic content
+@app.get("/htmx/featured-articles", response_class=HTMLResponse)
+async def htmx_featured_articles(request: Request, db: Session = Depends(get_db)):
+    """Return rendered HTML for featured articles (for HTMX)"""
+    articles = db.query(Article).filter(Article.is_published == True)\
+                .order_by(Article.published_at.desc()).limit(3).all()
+    return templates.TemplateResponse("partials/article_card.html", {
+        "request": request, 
+        "articles": articles
+    })
+
+# HTMX endpoint for related articles
+@app.get("/htmx/related-articles/{category}/{article_id}", response_class=HTMLResponse)
+async def htmx_related_articles(request: Request, category: str, article_id: int, db: Session = Depends(get_db)):
+    """Return rendered HTML for related articles"""
+    # Get 3 related articles from the same category, excluding current article
+    related_articles = db.query(Article).filter(
+        Article.category == category,
+        Article.is_published == True,
+        Article.id != article_id
+    ).order_by(Article.published_at.desc()).limit(3).all()
+    
+    return templates.TemplateResponse("partials/related_articles.html", {
+        "request": request,
+        "articles": related_articles
+    })
