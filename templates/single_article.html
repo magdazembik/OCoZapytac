@@ -5,7 +5,7 @@
 {% block content %}
 <!-- Breadcrumb -->
 <section class="custom-page-header py-3" style="background-color: #f8fafc;">
-    <div class="container">
+    <div class="container-fluid px-4">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0" style="font-size: 0.875rem;">
                 <li class="breadcrumb-item"><a href="/" style="color: #2563eb; text-decoration: none;">Strona główna</a></li>
@@ -18,22 +18,22 @@
 
 <!-- Article Content -->
 <section class="custom-about-section py-5">
-    <div class="container">
+    <div class="container-fluid px-4">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-12">
                 <!-- Article Header -->
-                <div class="article-header mb-5">
+                <div class="article-header mb-5 text-center">
                     <div class="mb-3">
                         <span class="article-category" style="display: inline-block; background-color: #dbeafe; color: #1e40af; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.875rem; font-weight: 500;">
                             {{ article.category }}
                         </span>
                     </div>
                     
-                    <h1 class="article-title mb-4" style="font-size: 2.5rem; font-weight: 700; color: #1e293b; line-height: 1.2;">
+                    <h1 class="article-title mb-4" style="font-size: 2.5rem; font-weight: 700; color: #1e293b; line-height: 1.2; max-width: 800px; margin: 0 auto;">
                         {{ article.title }}
                     </h1>
                     
-                    <div class="article-meta mb-4" style="display: flex; align-items: center; gap: 2rem; color: #6b7280; font-size: 0.875rem; padding-bottom: 2rem; border-bottom: 1px solid #e2e8f0;">
+                    <div class="article-meta mb-4" style="display: flex; align-items: center; justify-content: center; gap: 2rem; color: #6b7280; font-size: 0.875rem; padding-bottom: 2rem; border-bottom: 1px solid #e2e8f0; max-width: 800px; margin: 0 auto;">
                         <span class="article-author" style="font-weight: 500; color: #374151;">
                             <i class="fas fa-user me-1"></i>{{ article.author }}
                         </span>
@@ -47,7 +47,7 @@
                     
                     <!-- Article Excerpt -->
                     {% if article.excerpt %}
-                    <div class="article-excerpt mb-4" style="font-size: 1.25rem; color: #64748b; font-style: italic; line-height: 1.6; padding: 1.5rem; background-color: #f8fafc; border-left: 4px solid #2563eb; border-radius: 0 6px 6px 0;">
+                    <div class="article-excerpt mb-4" style="font-size: 1.25rem; color: #64748b; font-style: italic; line-height: 1.6; padding: 1.5rem; background-color: #f8fafc; border-left: 4px solid #2563eb; border-radius: 0 6px 6px 0; max-width: 800px; margin: 0 auto;">
                         {{ article.excerpt }}
                     </div>
                     {% endif %}
@@ -56,7 +56,7 @@
                 <!-- YouTube Video Section (if video_url exists) -->
                 {% if article.video_url %}
                 <div class="video-section mb-5">
-                    <div class="video-container" style="position: relative; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; padding: 2rem; margin: 2rem 0;">
+                    <div class="video-container" style="position: relative; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; padding: 2rem; margin: 2rem auto; max-width: 1000px;">
                         <div class="row align-items-center">
                             <div class="col-md-8">
                                 <h3 style="color: white; font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">
@@ -81,8 +81,8 @@
                 </div>
                 {% endif %}
 
-                <!-- Article Content -->
-                <div class="article-content" style="font-size: 1.125rem; line-height: 1.8; color: #374151;">
+                <!-- Article Content - Full Width -->
+                <div class="article-content" style="font-size: 1.125rem; line-height: 1.8; color: #374151; width: 100%; max-width: none;">
                     {% if article.content_file_path %}
                         <!-- Load content from uploaded HTML file -->
                         {% set content_from_file = article.get_content() %}
@@ -94,7 +94,7 @@
                 </div>
 
                 <!-- Article Footer -->
-                <div class="article-footer mt-5 pt-4" style="border-top: 1px solid #e2e8f0;">
+                <div class="article-footer mt-5 pt-4" style="border-top: 1px solid #e2e8f0; max-width: 800px; margin: 0 auto;">
                     <div class="row align-items-center">
                         <div class="col-md-6">
                             <div class="article-tags">
@@ -144,23 +144,6 @@
     </div>
 </section>
 
-<!-- Newsletter Section -->
-<section class="custom-newsletter" id="newsletter">
-    <div class="container">
-        <div class="newsletter-content">
-            <h2>Bądź na bieżąco</h2>
-            <p>Zapisz się do naszego newslettera i otrzymuj najnowsze artykuły bezpośrednio na swoją skrzynkę e-mail.</p>
-            <form class="newsletter-form" 
-                  hx-post="http://localhost:8000/api/v1/users/subscribe" 
-                  hx-target="#newsletter-result"
-                  hx-swap="innerHTML">
-                <input type="email" name="email" placeholder="Twój adres e-mail" required>
-                <button type="submit" class="btn btn-custom-white">Zapisz się</button>
-            </form>
-            <div id="newsletter-result"></div>
-        </div>
-    </div>
-</section>
 {% endblock %}
 
 {% block scripts %}
