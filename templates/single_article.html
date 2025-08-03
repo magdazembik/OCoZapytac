@@ -61,10 +61,10 @@
                             <div class="col-md-8">
                                 <h3 style="color: white; font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">
                                     <i class="fab fa-youtube me-2" style="color: #ff0000;"></i>
-                                    Obejrzyj!
+                                    Zobacz wideo do tego artykułu
                                 </h3>
                                 <p style="color: rgba(255,255,255,0.9); margin-bottom: 1.5rem; line-height: 1.6;">
-                                    Jeżeli nie lubisz czytać, alternatywą jest obejrzenie / wysłuchanie tego artykułu w formie wideo na YouTube.
+                                    Obejrzyj szczegółowe omówienie tematu w formie wideo. Znajdziesz tam dodatkowe przykłady i praktyczne wskazówki.
                                 </p>
                                 <a href="{{ article.video_url }}" target="_blank" class="btn btn-custom-white" style="background-color: white; color: #2563eb; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem;">
                                     <i class="fas fa-play"></i>
@@ -83,7 +83,14 @@
 
                 <!-- Article Content -->
                 <div class="article-content" style="font-size: 1.125rem; line-height: 1.8; color: #374151;">
-                    {{ article.content | safe }}
+                    {% if article.content_file_path %}
+                        <!-- Load content from uploaded HTML file -->
+                        {% set content_from_file = article.get_content() %}
+                        {{ content_from_file | safe }}
+                    {% else %}
+                        <!-- Use content field directly -->
+                        {{ article.content | safe }}
+                    {% endif %}
                 </div>
 
                 <!-- Article Footer -->
@@ -137,7 +144,23 @@
     </div>
 </section>
 
-
+<!-- Newsletter Section -->
+<section class="custom-newsletter" id="newsletter">
+    <div class="container">
+        <div class="newsletter-content">
+            <h2>Bądź na bieżąco</h2>
+            <p>Zapisz się do naszego newslettera i otrzymuj najnowsze artykuły bezpośrednio na swoją skrzynkę e-mail.</p>
+            <form class="newsletter-form" 
+                  hx-post="http://localhost:8000/api/v1/users/subscribe" 
+                  hx-target="#newsletter-result"
+                  hx-swap="innerHTML">
+                <input type="email" name="email" placeholder="Twój adres e-mail" required>
+                <button type="submit" class="btn btn-custom-white">Zapisz się</button>
+            </form>
+            <div id="newsletter-result"></div>
+        </div>
+    </div>
+</section>
 {% endblock %}
 
 {% block scripts %}

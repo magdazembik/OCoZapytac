@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from datetime import datetime
-
+from pathlib import Path
 from app.core.database import get_db
 from app.models.article import Article
 from app.models.user import User
@@ -77,10 +77,11 @@ async def create_article(
     db: Session = Depends(get_db)
 ):
     """
-    Create new article - THIS IS THE ENDPOINT YOU'LL USE TO CREATE ARTICLES
+    Create new article - UPDATED TO SUPPORT HTML FILE UPLOADS
     
-    Example usage:
-    POST /api/v1/articles/
+    Two ways to create articles:
+    
+    Method 1 - Direct HTML content (original way):
     {
         "title": "Mój pierwszy artykuł",
         "slug": "moj-pierwszy-artykul",
@@ -91,11 +92,30 @@ async def create_article(
         "read_time": "5 min",
         "is_published": true
     }
+    
+    Method 2 - Using uploaded HTML file (NEW):
+    {
+        "title": "Mój pierwszy artykuł",
+        "slug": "moj-pierwszy-artykul",
+        "excerpt": "Krótki opis artykułu...",
+        "content": "Brief description (optional)",
+        "content_file_path": "uploaded_html_content/20241231_123456_abc123_my-article.html",
+        "category": "Podatki",
+        "author": "Jan Kowalski",
+        "read_time": "5 min",
+        "is_published": true
+    }
     """
     # Check if slug already exists
     existing_article = db.query(Article).filter(Article.slug == article.slug).first()
     if existing_article:
         raise HTTPException(status_code=400, detail="Artykuł z tym slug już istnieje")
+    
+    # Validate content_file_path if provided
+    if hasattr(article, 'content_file_path') and article.content_file_path:
+        file_path = Path(article.content_file_path)
+        if not file_path.exists():
+            raise HTTPException(status_code=400, detail=f"HTML file not found: {article.content_file_path}")
     
     # Create article
     article_data = article.dict()
@@ -132,6 +152,12 @@ async def update_article(
     if not db_article:
         raise HTTPException(status_code=404, detail="Artykuł nie został znaleziony")
     
+    # Validate content_file_path if provided in update
+    if hasattr(article_update, 'content_file_path') and article_update.content_file_path:
+        file_path = Path(article_update.content_file_path)
+        if not file_path.exists():
+            raise HTTPException(status_code=400, detail=f"HTML file not found: {article_update.content_file_path}")
+    
     # Track if article is being published for the first time
     was_published = db_article.is_published
     
@@ -166,6 +192,15 @@ async def delete_article(article_id: int, db: Session = Depends(get_db)):
     db_article = db.query(Article).filter(Article.id == article_id).first()
     if not db_article:
         raise HTTPException(status_code=404, detail="Artykuł nie został znaleziony")
+    
+    # Optionally delete the associated HTML file
+    if db_article.content_file_path:
+        try:
+            file_path = Path(db_article.content_file_path)
+            if file_path.exists():
+                file_path.unlink()
+        except Exception:
+            pass  # Don't fail deletion if file removal fails
     
     db.delete(db_article)
     db.commit()

@@ -32,3 +32,4 @@ CREATE TABLE IF NOT EXISTS articles (
 
 SELECT * FROM articles;
 DELETE FROM articles;
+ALTER TABLE articles ADD COLUMN content_file_path VARCHAR(500);

@@ -21,6 +21,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime
+from app.api.v1.endpoints.html_upload import router as html_upload_router
 
 
 # Set up Jinja2 templates
@@ -155,6 +156,9 @@ def create_application() -> FastAPI:
 
     # Include API router
     app.include_router(api_router, prefix=settings.API_V1_STR)
+    
+    # NEW: Include HTML upload router
+    app.include_router(html_upload_router, prefix=f"{settings.API_V1_STR}/content", tags=["HTML Content Upload"])
 
     # # Include static pages router
     # app.include_router(pages.router)
@@ -167,6 +171,18 @@ def create_application() -> FastAPI:
     return app
 
 app = create_application()
+
+def get_article_content(article: Article) -> str:
+    """
+    Helper function to get article content from either content field or file
+    """
+    if article.content_file_path:
+        try:
+            with open(article.content_file_path, 'r', encoding='utf-8') as f:
+                return f.read()
+        except FileNotFoundError:
+            return article.content or "Content file not found"
+    return article.content or ""
 
 @app.get("/", response_class=HTMLResponse, include_in_schema=False)
 async def root(request: Request, db: Session = Depends(get_db)):
@@ -205,6 +221,27 @@ async def articles(request: Request, db: Session = Depends(get_db)):
 async def categories(request: Request):
     return templates.TemplateResponse("categories.html", {"request": request})
 
+# Single article page endpoint - UPDATED to handle file content
+@app.get("/artykul/{slug}", response_class=HTMLResponse)
+async def single_article(request: Request, slug: str, db: Session = Depends(get_db)):
+    """Display single article by slug"""
+    # Get article by slug
+    article = db.query(Article).filter(
+        Article.slug == slug,
+        Article.is_published == True
+    ).first()
+    
+    if not article:
+        raise HTTPException(status_code=404, detail="Artykuł nie został znaleziony")
+    
+    # Add a method to get content for the template
+    article.get_content = lambda: get_article_content(article)
+    
+    return templates.TemplateResponse("single_article.html", {
+        "request": request,
+        "article": article
+    })
+
 # HTMX endpoints for dynamic content
 @app.get("/htmx/featured-articles", response_class=HTMLResponse)
 async def htmx_featured_articles(request: Request, db: Session = Depends(get_db)):
@@ -221,66 +258,6 @@ async def htmx_all_articles(request: Request, db: Session = Depends(get_db)):
     """Return rendered HTML for all articles (for HTMX)"""
     articles = db.query(Article).filter(Article.is_published == True)\
                 .order_by(Article.published_at.desc()).all()
-    return templates.TemplateResponse("partials/article_card.html", {
-        "request": request, 
-        "articles": articles
-    })
-
-# Contact form endpoint
-@app.post("/api/v1/contact/")
-async def submit_contact_form(
-    form_data: ContactForm,
-    background_tasks: BackgroundTasks
-):
-    """
-    Handle contact form submission
-    """
-    try:
-        # Send email in background
-        background_tasks.add_task(send_contact_email, form_data)
-        
-        return {
-            "status": "success",
-            "message": "Dziękujemy za wiadomość! Odpowiemy w ciągu 24-48 godzin.",
-            "html": """
-            <div class="alert alert-success" style="padding: 15px; background-color: #d1edff; border: 1px solid #0ea5e9; border-radius: 6px; color: #0369a1; margin-top: 15px;">
-                <strong>✓ Wiadomość wysłana!</strong><br>
-                Dziękujemy za kontakt. Odpowiemy w ciągu 24-48 godzin.
-            </div>
-            """
-        }
-        
-    except Exception as e:
-        print(f"Contact form error: {str(e)}")
-        raise HTTPException(
-            status_code=500, 
-            detail="Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później."
-        )
-
-# NEW: Single article page endpoint
-@app.get("/artykul/{slug}", response_class=HTMLResponse)
-async def single_article(request: Request, slug: str, db: Session = Depends(get_db)):
-    """Display single article by slug"""
-    # Get article by slug
-    article = db.query(Article).filter(
-        Article.slug == slug,
-        Article.is_published == True
-    ).first()
-    
-    if not article:
-        raise HTTPException(status_code=404, detail="Artykuł nie został znaleziony")
-    
-    return templates.TemplateResponse("single_article.html", {
-        "request": request,
-        "article": article
-    })
-
-# HTMX endpoints for dynamic content
-@app.get("/htmx/featured-articles", response_class=HTMLResponse)
-async def htmx_featured_articles(request: Request, db: Session = Depends(get_db)):
-    """Return rendered HTML for featured articles (for HTMX)"""
-    articles = db.query(Article).filter(Article.is_published == True)\
-                .order_by(Article.published_at.desc()).limit(3).all()
     return templates.TemplateResponse("partials/article_card.html", {
         "request": request, 
         "articles": articles
